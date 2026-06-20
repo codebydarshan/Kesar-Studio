@@ -170,6 +170,7 @@ export async function createProject(data: unknown) {
 
   revalidatePath("/projects");
   revalidatePath("/admin/projects");
+  revalidatePath("/about");
   revalidatePath("/");
   return project;
 }
@@ -199,14 +200,24 @@ export async function updateProject(id: string, data: unknown) {
   revalidatePath("/projects");
   revalidatePath(`/projects/${project.slug}`);
   revalidatePath("/admin/projects");
+  revalidatePath("/about");
   revalidatePath("/");
   return project;
 }
 
 export async function deleteProject(id: string) {
   await requireAdmin();
+  const [existing] = await db
+    .select({ slug: projects.slug })
+    .from(projects)
+    .where(eq(projects.id, id))
+    .limit(1);
   await db.delete(projects).where(eq(projects.id, id));
   revalidatePath("/projects");
+  if (existing?.slug) {
+    revalidatePath(`/projects/${existing.slug}`);
+  }
   revalidatePath("/admin/projects");
+  revalidatePath("/about");
   revalidatePath("/");
 }

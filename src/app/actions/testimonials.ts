@@ -43,6 +43,7 @@ export async function createTestimonial(data: unknown) {
     .returning();
   revalidatePath("/testimonials");
   revalidatePath("/admin/testimonials");
+  revalidatePath("/about");
   revalidatePath("/");
   return testimonial;
 }
@@ -60,6 +61,7 @@ export async function updateTestimonial(id: string, data: unknown) {
     .returning();
   revalidatePath("/testimonials");
   revalidatePath("/admin/testimonials");
+  revalidatePath("/about");
   revalidatePath("/");
   return testimonial;
 }
@@ -69,5 +71,6 @@ export async function deleteTestimonial(id: string) {
   await db.delete(testimonials).where(eq(testimonials.id, id));
   revalidatePath("/testimonials");
   revalidatePath("/admin/testimonials");
+  revalidatePath("/about");
   revalidatePath("/");
 }

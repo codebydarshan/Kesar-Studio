@@ -1,0 +1,2 @@
+export const ADMIN_POLL_INTERVAL_MS = 15_000;
+export const PUBLIC_CONTENT_POLL_INTERVAL_MS = 5 * 60 * 1000;

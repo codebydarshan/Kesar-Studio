@@ -35,6 +35,7 @@ export async function createTeamMember(data: unknown) {
     .returning();
   revalidatePath("/about");
   revalidatePath("/admin/team");
+  revalidatePath("/");
   return member;
 }
 
@@ -53,6 +54,7 @@ export async function updateTeamMember(id: string, data: unknown) {
     .returning();
   revalidatePath("/about");
   revalidatePath("/admin/team");
+  revalidatePath("/");
   return member;
 }
 
@@ -61,4 +63,5 @@ export async function deleteTeamMember(id: string) {
   await db.delete(teamMembers).where(eq(teamMembers.id, id));
   revalidatePath("/about");
   revalidatePath("/admin/team");
+  revalidatePath("/");
 }
