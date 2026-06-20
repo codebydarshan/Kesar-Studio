@@ -15,12 +15,11 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="flex min-h-[60vh] flex-1 flex-col">
-      <ErrorUI
-        showRetry
-        onRetry={reset}
-        message="We encountered an unexpected error while loading this page."
-      />
-    </div>
+    <ErrorUI
+      title="Something went wrong"
+      message="We encountered an unexpected error while loading this page. You can try again or use the links below to get back on track."
+      showRetry
+      onRetry={reset}
+    />
   );
 }
